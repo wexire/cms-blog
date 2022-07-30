@@ -1,14 +1,16 @@
 export interface Post {
-  node: {
-    title: string;
-    slug: string;
-    excerpt: string;
-    content: string;
-    featuredImage: { url: string };
-    categories: Category[];
-    createdAt: Date;
-    author: Author;
-  };
+  title: string;
+  slug: string;
+  excerpt?: string;
+  content?: string;
+  featuredImage: { url: string };
+  categories?: Category[];
+  createdAt: Date;
+  author?: Author;
+}
+
+export interface NodePost {
+  node: Post;
 }
 
 export interface Category {
@@ -24,5 +26,5 @@ export interface Author {
 }
 
 export interface Result {
-  posts: Post[];
+  posts: NodePost[];
 }

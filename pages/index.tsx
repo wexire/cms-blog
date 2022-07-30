@@ -1,10 +1,10 @@
 import Head from "next/head";
 import type { GetStaticProps, GetStaticPropsResult } from "next";
-import { Post, Result } from "../types";
+import { NodePost, Result } from "../types";
 import { Categories, PostCard, PostWidget } from "../components";
 import { getPosts } from "../services";
 
-const Home = ({ posts }: { posts: Post[] }) => {
+const Home = ({ posts }: { posts: NodePost[] }) => {
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
@@ -14,7 +14,7 @@ const Home = ({ posts }: { posts: Post[] }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
           {posts.map((post) => (
-            <PostCard key={post.node.title} post={post} />
+            <PostCard key={post.node.title} post={post.node} />
           ))}
         </div>
 
