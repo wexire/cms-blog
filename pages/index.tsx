@@ -1,20 +1,10 @@
 import Head from "next/head";
-import type { NextPage } from "next";
-import { Post } from "../types";
+import type { GetStaticProps, GetStaticPropsResult } from "next";
+import { Post, Result } from "../types";
 import { Categories, PostCard, PostWidget } from "../components";
+import { getPosts } from "../services";
 
-const posts: Post[] = [
-  {
-    title: "Falafel burgers lunch at home",
-    excerpt: "Super healthy",
-  },
-  {
-    title: "Chicken fries lunch at home",
-    excerpt: "Super unhealthy",
-  },
-];
-
-const Home: NextPage = () => {
+const Home = ({ posts }: { posts: Post[] }) => {
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
@@ -23,8 +13,8 @@ const Home: NextPage = () => {
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
-          {posts.map((post: Post) => (
-            <PostCard post={post} key={post.title} />
+          {posts.map((post) => (
+            <PostCard key={post.node.title} post={post} />
           ))}
         </div>
 
@@ -37,6 +27,16 @@ const Home: NextPage = () => {
       </div>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async (): Promise<
+  GetStaticPropsResult<Result>
+> => {
+  const posts = (await getPosts()) || [];
+
+  return {
+    props: { posts },
+  };
 };
 
 export default Home;
