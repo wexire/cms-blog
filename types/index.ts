@@ -2,7 +2,9 @@ export interface Post {
   title: string;
   slug: string;
   excerpt?: string;
-  content?: string;
+  content?: {
+    raw: { children: { type: string; children: { text: string }[] }[] };
+  };
   featuredImage: { url: string };
   categories?: Category[];
   createdAt: Date;

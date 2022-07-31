@@ -1,6 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { Post } from "../types";
+import { getContentFragment } from "../utils";
 
 const PostDetail = ({ post }: { post: Post }) => {
   return (
@@ -9,7 +10,7 @@ const PostDetail = ({ post }: { post: Post }) => {
         <img
           src={post.featuredImage.url}
           alt={post.title}
-          className="object-top h-full w-full rounded-lg"
+          className="w-full h-full rounded-lg"
         />
       </div>
       <div className="px-4 lg:px-0">
@@ -45,6 +46,13 @@ const PostDetail = ({ post }: { post: Post }) => {
           </div>
         </div>
         <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
+        {post.content!.raw.children.map((typeObj, index) => {
+          const children = typeObj.children.map((item, itemindex) =>
+            getContentFragment(itemindex, item.text, item)
+          );
+
+          return getContentFragment(index, children, typeObj, typeObj.type);
+        })}
       </div>
     </div>
   );
