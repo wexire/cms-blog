@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Link from "next/link";
-import { Category, Post } from "../types";
+import { Post } from "../types";
 import { getRecentPosts, getSimilarPosts } from "../services";
 
 const PostWidget = ({
   categories,
   slug,
 }: {
-  categories?: Category[];
+  categories?: string[];
   slug?: string;
 }) => {
   const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     if (slug) {
-      getSimilarPosts().then((result) => setRelatedPosts(result));
+      getSimilarPosts(categories!, slug).then((result) =>
+        setRelatedPosts(result)
+      );
     } else {
       getRecentPosts().then((result) => setRelatedPosts(result));
     }

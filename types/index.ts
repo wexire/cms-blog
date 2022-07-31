@@ -26,5 +26,5 @@ export interface Author {
 }
 
 export interface Result {
-  posts: NodePost[];
+  post?: Post;
 }
