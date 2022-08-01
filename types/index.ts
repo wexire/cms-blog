@@ -30,3 +30,10 @@ export interface Author {
 export interface Result {
   post?: Post;
 }
+
+export interface CommentObj {
+  name: string;
+  email: string;
+  comment: string;
+  slug: string;
+}
