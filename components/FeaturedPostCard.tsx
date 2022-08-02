@@ -6,7 +6,7 @@ import { Post } from "../types";
 
 const FeaturedPostCard = ({ post }: { post: Post }) => {
   return (
-    <div className="relative h-72">
+    <div className="relative h-72 transition duration-500 transform hover:scale-95">
       <div
         className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72"
         style={{ backgroundImage: `url('${post.featuredImage.url}')` }}
