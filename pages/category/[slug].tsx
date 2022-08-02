@@ -4,13 +4,18 @@ import {
   GetStaticProps,
   GetStaticPropsResult,
 } from "next";
+import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
-import { Categories, PostCard, PostWidget } from "../../components";
+import { Categories, Loader, PostCard, PostWidget } from "../../components";
 import { getCategories, getCategoryPosts } from "../../services";
 import { Post, Result } from "../../types";
 
 const CategoryPosts = ({ posts }: { posts: Post[] }) => {
+  const router = useRouter();
+
+  if (router.isFallback) return <Loader />;
+
   return (
     <div className="container mx-auto px-10 mb-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -55,7 +60,7 @@ export const getStaticPaths: GetStaticPaths =
 
     return {
       paths,
-      fallback: false,
+      fallback: true,
     };
   };
 
