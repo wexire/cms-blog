@@ -164,3 +164,35 @@ export const getComments = async (slug: string): Promise<CommentObj[]> => {
 
   return result.comments;
 };
+
+export const getCategoryPosts = async (slug: string): Promise<Post[]> => {
+  const query = gql`
+    query GetCategoryPosts($slug: String!) {
+      posts(where: { categories_some: { slug: $slug } }) {
+        author {
+          bio
+          name
+          id
+          photo {
+            url
+          }
+        }
+        createdAt
+        excerpt
+        slug
+        title
+        featuredImage {
+          url
+        }
+        categories {
+          name
+          slug
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.posts;
+};

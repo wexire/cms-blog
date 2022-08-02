@@ -29,6 +29,7 @@ export interface Author {
 
 export interface Result {
   post?: Post;
+  posts?: NodePost[] | Post[];
 }
 
 export interface CommentObj {
