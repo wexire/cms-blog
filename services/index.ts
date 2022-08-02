@@ -196,3 +196,27 @@ export const getCategoryPosts = async (slug: string): Promise<Post[]> => {
 
   return result.posts;
 };
+
+export const getFeaturedPosts = async (): Promise<Post[]> => {
+  const query = gql`
+    query GetFeaturedPosts {
+      posts(where: { featuredPost: true }) {
+        featuredImage {
+          url
+        }
+        title
+        slug
+        author {
+          name
+          photo {
+            url
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.posts;
+};
