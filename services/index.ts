@@ -148,3 +148,19 @@ export const submitComment = async (obj: CommentObj): Promise<JSON> => {
 
   return result.json();
 };
+
+export const getComments = async (slug: string): Promise<CommentObj[]> => {
+  const query = gql`
+    query getComments($slug: String!) {
+      comments(where: { post: { slug: $slug } }) {
+        name
+        createdAt
+        comment
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.comments;
+};

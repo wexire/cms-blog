@@ -33,7 +33,8 @@ export interface Result {
 
 export interface CommentObj {
   name: string;
-  email: string;
+  email?: string;
   comment: string;
-  slug: string;
+  slug?: string;
+  createdAt?: Date;
 }
